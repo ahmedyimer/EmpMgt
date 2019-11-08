@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <h3>@ViewData["PageTitle"]</h3>
+    <h4>@ViewBag.PageTitle</h4>
+    @{
+        var employee = ViewData["Employee"] as EmployeeManagement.Models.Employee;
+
+        //var employee1 = ViewBag.Employee as EmployeeManagement.Models.Employee;
+    }
+
+
+
+    <div>Name: @employee.Name</div>
+    <div>Email: @employee.Email</div>
+    <div>Department: @employee.Department</div>
+
+    <div>************************************************</div>
+
+    <div>Name: @ViewBag.Employee.Name</div>
+    <div>Email: @ViewBag.Employee.Email</div>
+    <div>Department: @ViewBag.Employee.Department</div>
+</body>
+</html>
