@@ -46,18 +46,18 @@ namespace EmployeeManagement.Controllers
         {
             Employee model = _employeeRepository.GetEmployee(1);
 
-            // Pass PageTitle and Employee model to the View using ViewData
-            ViewData["PageTitle"] = "Employee Details";
-            ViewData["Employee"] = model;
+            //// Pass PageTitle and Employee model to the View using ViewData
+            //ViewData["PageTitle"] = "Employee Details";
+            //ViewData["Employee"] = model;
 
-            // To store the page title and empoyee model object in the 
-            // ViewBag we are using dynamic properties PageTitle and Employee
-            ViewBag.PageTitle = "Employee Details";
-            ViewBag.Employee = model;
+            //// To store the page title and empoyee model object in the 
+            //// ViewBag we are using dynamic properties PageTitle and Employee
+            //ViewBag.PageTitle = "Employee Details";
+            //ViewBag.Employee = model;
 
-            return View();
+            //return View();
 
-            //return View(model);
+            return View(model);
         }
 
 

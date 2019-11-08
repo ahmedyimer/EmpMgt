@@ -1,4 +1,5 @@
-﻿
+﻿@model EmployeeManagement.Models.Employee
+
 @{
     Layout = null;
 }
@@ -11,24 +12,59 @@
     <title>Details</title>
 </head>
 <body>
-    <h3>@ViewData["PageTitle"]</h3>
-    <h4>@ViewBag.PageTitle</h4>
-    @{
-        var employee = ViewData["Employee"] as EmployeeManagement.Models.Employee;
 
-        //var employee1 = ViewBag.Employee as EmployeeManagement.Models.Employee;
-    }
-
-
-
-    <div>Name: @employee.Name</div>
-    <div>Email: @employee.Email</div>
-    <div>Department: @employee.Department</div>
-
-    <div>************************************************</div>
-
-    <div>Name: @ViewBag.Employee.Name</div>
-    <div>Email: @ViewBag.Employee.Email</div>
-    <div>Department: @ViewBag.Employee.Department</div>
+    <div>
+        <h4>Employee</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Department)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Department)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </body>
 </html>
+
+@*<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h3>@ViewBag.PageTitle</h3>
+
+    <div>
+        Name : @Model.Name
+    </div>
+    <div>
+        Email : @Model.Email
+    </div>
+    <div>
+        Department : @Model.Department
+    </div>
+</body>
+</html>*@
