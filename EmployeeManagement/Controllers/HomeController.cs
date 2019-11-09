@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EmployeeManagement.Models;
+using EmployeeManagement.ViewModels;
 
 namespace EmployeeManagement.Controllers
 {
@@ -44,7 +45,7 @@ namespace EmployeeManagement.Controllers
 
         public ViewResult Details()
         {
-            Employee model = _employeeRepository.GetEmployee(1);
+            //Employee model = _employeeRepository.GetEmployee(1);
 
             //// Pass PageTitle and Employee model to the View using ViewData
             //ViewData["PageTitle"] = "Employee Details";
@@ -57,9 +58,42 @@ namespace EmployeeManagement.Controllers
 
             //return View();
 
-            return View(model);
+            //return View(model);
+
+
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Employee = _employeeRepository.GetEmployee(1),
+                PageTitle = "Employee Details"
+            };
+
+            return View(homeDetailsViewModel);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee newEmployee = _employeeRepository.Add(employee);
+                return RedirectToAction("details", new { id = newEmployee.Id });
+            }
+
+            return View();
+        }
+
+
+        public IActionResult Employees()
+        {
+            var model = _employeeRepository.GetAllEmployees();
+            return View(model);
+        }
 
         public IActionResult Privacy()
         {
@@ -73,3 +107,48 @@ namespace EmployeeManagement.Controllers
         }
     }
 }
+
+//[Route("Home")]
+//public class HomeController : Controller
+//{
+//    private IEmployeeRepository _employeeRepository;
+
+//    public HomeController(IEmployeeRepository employeeRepository)
+//    {
+//        _employeeRepository = employeeRepository;
+//    }
+
+//    [Route("")]
+//    [Route("Index")]
+//    public ViewResult Index()
+//    {
+//        var model = _employeeRepository.GetAllEmployees();
+//        return View(model);
+//    }
+
+//    [Route("Details/{id?}")]
+//    public ViewResult Details(int? id)
+//    {
+//        HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+//        {
+//            Employee = _employeeRepository.GetEmployee(id ?? 1),
+//            PageTitle = "Employee Details"
+//        };
+
+//        return View(homeDetailsViewModel);
+//    }
+//}
+
+//[Route("[controller]/[action]")]
+//public class DepartmentsController : Controller
+//{
+//    public string List()
+//    {
+//        return "List() of DepartmentsController";
+//    }
+
+//    public string Details()
+//    {
+//        return "Details() of DepartmentsController";
+//    }
+//}

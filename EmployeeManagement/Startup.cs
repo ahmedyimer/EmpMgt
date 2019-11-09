@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +26,12 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection")));
+            //services.AddMvc().AddXmlSerializerFormatters();
+            //services.AddControllersWithViews().AddXmlDataContractSerializerFormatters();
+            //services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+
+
             //services.Configure<CookiePolicyOptions>(options =>
             //{
             //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -39,6 +46,8 @@ namespace EmployeeManagement
 
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
             
+            //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+            //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
             //The controller to be able to return data in XML format
             //services.AddMvc().AddXmlSerializerFormatters();
         }
@@ -128,5 +137,7 @@ namespace EmployeeManagement
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+
     }
 }
