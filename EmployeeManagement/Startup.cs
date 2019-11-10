@@ -26,10 +26,10 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection")));
-            //services.AddMvc().AddXmlSerializerFormatters();
-            //services.AddControllersWithViews().AddXmlDataContractSerializerFormatters();
-            //services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection")));
+            services.AddMvc().AddXmlSerializerFormatters();
+            services.AddControllersWithViews().AddXmlDataContractSerializerFormatters();
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
 
             //services.Configure<CookiePolicyOptions>(options =>
@@ -39,12 +39,24 @@ namespace EmployeeManagement
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
 
-            services.AddControllersWithViews();
+            
+            
+            //services.AddControllersWithViews();
+
+
+
+
             //services.AddMvc();
             //services.AddMvcCore();
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+
+
+
+            //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+
+
+
             
             //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
             //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
