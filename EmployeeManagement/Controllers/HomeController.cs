@@ -16,9 +16,10 @@ namespace EmployeeManagement.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly IHostingEnvironment _hostingEnvironment;
-        public HomeController(ILogger<HomeController> logger, IEmployeeRepository employeeRepository, 
-                                IHostingEnvironment hostingEnvironment)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+       
+        public HomeController(ILogger<HomeController> logger, IEmployeeRepository employeeRepository,
+                                IWebHostEnvironment hostingEnvironment)
         {
             _logger = logger;
             _employeeRepository = employeeRepository;
@@ -51,7 +52,7 @@ namespace EmployeeManagement.Controllers
         //    return new ObjectResult(model);
         //}
 
-        public ViewResult Details(int id)
+        public ViewResult Details(int? id)
         {
             //Employee model = _employeeRepository.GetEmployee(1);
 
@@ -68,9 +69,11 @@ namespace EmployeeManagement.Controllers
 
             //return View(model);
 
+            throw new Exception("Error in Details View");
+
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id),
+                Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
             };
 

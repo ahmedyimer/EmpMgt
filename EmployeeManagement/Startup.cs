@@ -76,13 +76,21 @@ namespace EmployeeManagement
                 {
                     SourceCodeLineCount = 10
                 };
+                //app.UseStatusCodePages();
+                //app.UseStatusCodePagesWithRedirects("/Error/{0}");
+                //app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
                 app.UseDeveloperExceptionPage(developerExceptionPageOptions);
             }
             // else serve User Friendly Error Page with Application Support Contact Info
             else if (env.IsStaging() || env.IsProduction() || env.IsEnvironment("UAT"))
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseStatusCodePages();
+                //app.UseStatusCodePagesWithRedirects("/Error/{0}");
+                //app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+                //app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
 
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
@@ -153,3 +161,5 @@ namespace EmployeeManagement
 
     }
 }
+
+
