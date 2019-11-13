@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +33,24 @@ namespace EmployeeManagement
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddControllersWithViews().AddXmlDataContractSerializerFormatters();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequiredLength = 10;
+            //    options.Password.RequiredUniqueChars = 3;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //});
+
+            //or
+            //services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            //{
+            //    options.Password.RequiredLength = 10;
+            //    options.Password.RequiredUniqueChars = 3;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //})
+            //.AddEntityFrameworkStores<AppDbContext>();
+
 
 
             //services.Configure<CookiePolicyOptions>(options =>
@@ -39,8 +60,8 @@ namespace EmployeeManagement
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
 
-            
-            
+
+
             //services.AddControllersWithViews();
 
 
@@ -57,11 +78,20 @@ namespace EmployeeManagement
 
 
 
-            
+
             //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
             //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
             //The controller to be able to return data in XML format
             //services.AddMvc().AddXmlSerializerFormatters();
+
+            //To set authorization globally
+            //services.AddMvc(config => {
+            //    var policy = new AuthorizationPolicyBuilder()
+            //                    .RequireAuthenticatedUser()
+            //                    .Build();
+            //    config.Filters.Add(new AuthorizeFilter(policy));
+            //});
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,6 +142,7 @@ namespace EmployeeManagement
             //app.UseFileServer(fileServerOptions);
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             //app.Run(async (context) =>
             //{

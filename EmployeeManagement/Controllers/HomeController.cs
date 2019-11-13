@@ -9,9 +9,11 @@ using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeManagement.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -51,7 +53,7 @@ namespace EmployeeManagement.Controllers
         //    Employee model = _employeeRepository.GetEmployee(1);
         //    return new ObjectResult(model);
         //}
-
+        [AllowAnonymous]
         public ViewResult Details(int? id)
         {
             //Employee model = _employeeRepository.GetEmployee(1);
@@ -69,7 +71,15 @@ namespace EmployeeManagement.Controllers
 
             //return View(model);
 
-            throw new Exception("Error in Details View");
+            //throw new Exception("Error in Details View");
+
+            _logger.LogTrace("Trace Log");
+            _logger.LogDebug("Debug Log");
+            _logger.LogInformation("Information Log");
+            _logger.LogWarning("Warning Log");
+            _logger.LogError("Error Log");
+            _logger.LogCritical("Critical Log");
+
 
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
@@ -288,6 +298,9 @@ namespace EmployeeManagement.Controllers
 //        return "Details() of DepartmentsController";
 //    }
 //}
+
+
+
 
 
 
