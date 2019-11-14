@@ -33,7 +33,7 @@ namespace EmployeeManagement
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddControllersWithViews().AddXmlDataContractSerializerFormatters();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             //services.Configure<IdentityOptions>(options =>
             //{
